@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_inherit_prepayment"
+        model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']"
+                position="before">
+                <button
+                    name="%(sale_prepayments.action_sale_order_pre_payment)d"
+                    string="Confirm" type="action" states="draft,sent" />
+            </xpath>
+            <xpath
+                expr="//header/button[@name='action_confirm'][2]"
+                position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//header/button[@id='action_confirm']"
+                position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

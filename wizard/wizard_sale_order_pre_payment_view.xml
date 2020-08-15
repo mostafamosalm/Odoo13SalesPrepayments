@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_sale_order_pre_payment_form_view"
+        model="ir.ui.view">
+        <field name="name">Sale Order PrePayment</field>
+        <field name="model">wizard.sale.order.pre_payment</field>
+        <field name="arch" type="xml">
+            <form string="Sale Order PrePayment">
+                <group>
+                    <group>
+                        <field name="order_id" invisible="1"
+                            readonly="1" />
+                        <field name="journal_id" required="1"
+                            domain="[('type', 'in', ('bank','cash'))]" />
+                        <field name="payment_method_id"
+                            invisible="1" />
+                        <field name="amount_total" readonly="1"
+                            force_save="1" widget='monetary' invisible="1"/>
+                        <field name="amount_due" widget='monetary'/>
+                    </group>
+                    <group>
+                        <label for="amount_pay" />
+                        <div name="amount_div" class="o_row">
+                            <field name="amount_pay" required="1" widget='monetary'/>
+                            <field name="currency_id"
+                                options="{'no_create': True, 'no_open': True}"
+                                invisible="1" />
+                        </div>
+                        <field name="payment_date" required="1" />
+                        <field name="origin" />
+                        <field name="communication"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Make Payment"
+                        name="action_process" class="oe_highlight"
+                        type="object" />
+                    OR
+                    <button name="cancel" string="Cancel"
+                        class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_order_pre_payment"
+        model="ir.actions.act_window">
+        <field name="name">Sale Order PrePayment</field>
+        <field name="res_model">wizard.sale.order.pre_payment</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>
